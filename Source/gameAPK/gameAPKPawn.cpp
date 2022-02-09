@@ -13,6 +13,10 @@
 #include "Kismet/GameplayStatics.h"
 #include "Sound/SoundBase.h"
 
+#if PLATFORM_ANDROID
+#include "PugiTest/pugi/src/pugixml.hpp"
+#endif
+
 const FName AgameAPKPawn::MoveForwardBinding("MoveForward");
 const FName AgameAPKPawn::MoveRightBinding("MoveRight");
 const FName AgameAPKPawn::FireForwardBinding("FireForward");
@@ -135,5 +139,19 @@ void AgameAPKPawn::FireShot(FVector FireDirection)
 void AgameAPKPawn::ShotTimerExpired()
 {
 	bCanFire = true;
+}
+
+void AgameAPKPawn::BeginPlay()
+{
+	Super::BeginPlay();
+
+#if PLATFORM_ANDROID
+	// pugiXML lib test section
+	{
+		pugi::xml_document xml_doc{};
+		pugi::xml_parse_result xml_result{ xml_doc.load_file("test.xml") };
+	}
+
+#endif
 }
 
