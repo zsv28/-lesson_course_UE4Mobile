@@ -2,6 +2,7 @@
 
 using UnrealBuildTool;
 
+
 public class gameAPK : ModuleRules
 {
 	public gameAPK(ReadOnlyTargetRules Target) : base(Target)
@@ -12,7 +13,9 @@ public class gameAPK : ModuleRules
 
 		if (Target.Platform == UnrealTargetPlatform.Android)
 		{
-			PublicAdditionalLibraries.AddRange(new string[] { System.IO.Path.Combine(ModuleDirectory, "PugiTest", "pugi", "pugixml.lib") });
+			string TestPugiPath = System.IO.Path.Combine(ModuleDirectory, "TestPugi");
+
+			PublicAdditionalLibraries.AddRange(new string[] { System.IO.Path.Combine(TestPugiPath, "pugiXML", "pugixml.lib", "a") });
 		}
 	}
 }

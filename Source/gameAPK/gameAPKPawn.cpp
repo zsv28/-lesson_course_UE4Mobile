@@ -14,7 +14,7 @@
 #include "Sound/SoundBase.h"
 
 #if PLATFORM_ANDROID
-#include "PugiTest/pugi/src/pugixml.hpp"
+#include "TestPugi/pugiXML/src/pugixml.hpp"
 #endif
 
 const FName AgameAPKPawn::MoveForwardBinding("MoveForward");
