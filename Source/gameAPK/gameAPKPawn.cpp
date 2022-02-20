@@ -17,10 +17,14 @@
 #include "TestPugi/pugiXML/src/pugixml.hpp"
 #endif
 
+
+
+
 const FName AgameAPKPawn::MoveForwardBinding("MoveForward");
 const FName AgameAPKPawn::MoveRightBinding("MoveRight");
 const FName AgameAPKPawn::FireForwardBinding("FireForward");
 const FName AgameAPKPawn::FireRightBinding("FireRight");
+
 
 AgameAPKPawn::AgameAPKPawn()
 {	
@@ -54,6 +58,8 @@ AgameAPKPawn::AgameAPKPawn()
 	GunOffset = FVector(90.f, 0.f, 0.f);
 	FireRate = 0.1f;
 	bCanFire = true;
+
+
 }
 
 void AgameAPKPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
@@ -66,6 +72,7 @@ void AgameAPKPawn::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 	PlayerInputComponent->BindAxis(FireForwardBinding);
 	PlayerInputComponent->BindAxis(FireRightBinding);
 }
+
 
 void AgameAPKPawn::Tick(float DeltaSeconds)
 {
