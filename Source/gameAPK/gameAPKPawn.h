@@ -59,6 +59,7 @@ public:
 	/* Handler for the fire timer expiry */
 	void ShotTimerExpired();
 
+	
 	void BeginPlay();
 
 	// Static names for axis bindings

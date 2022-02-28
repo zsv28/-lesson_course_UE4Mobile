@@ -6,6 +6,10 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Engine/StaticMesh.h"
+#include <Kismet/GameplayStatics.h>
+#include <GameFramework/Actor.h>
+#include <Materials/MaterialInstanceDynamic.h>
+#include <Materials/Material.h>
 
 AgameAPKProjectile::AgameAPKProjectile() 
 {
@@ -38,8 +42,25 @@ void AgameAPKProjectile::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor,
 	// Only add impulse and destroy projectile if we hit a physics
 	if ((OtherActor != nullptr) && (OtherActor != this) && (OtherComp != nullptr) && OtherComp->IsSimulatingPhysics())
 	{
+		
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 20.0f, GetActorLocation());
-	}
 
+		
+		UMaterialInterface* Material = nullptr;
+		UStaticMeshComponent* Component = Cast<UStaticMeshComponent>(OtherActor->GetComponentByClass(UStaticMeshComponent::StaticClass()));
+		if (Component)
+		{
+			Material = Component->GetMaterial(0);
+		}
+		UMaterialInstanceDynamic* DynamicMaterialInstance = UMaterialInstanceDynamic::Create(Material, this);
+		if (Component)
+		{
+			Component->SetMaterial(0, DynamicMaterialInstance);
+		}
+		DynamicMaterialInstance->SetScalarParameterValue("ScalarParameter", 2.0f);
+		DynamicMaterialInstance->SetTextureParameterValue("TextureParameter", NewTextureRef);
+		DynamicMaterialInstance->SetVectorParameterValue("ColorParameter", FLinearColor(1, 0, 0, 1));
+	}
+	
 	Destroy();
 }
